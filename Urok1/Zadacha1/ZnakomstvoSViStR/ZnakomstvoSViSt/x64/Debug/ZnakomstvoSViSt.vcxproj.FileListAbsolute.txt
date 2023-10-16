@@ -1,2 +1,0 @@
-C:\Users\Ice7\source\repos\ZnakomstvoSViStR\x64\Debug\ZnakomstvoSViSt.exe.lastcodeanalysissucceeded
-C:\Users\Ice7\source\repos\ZnakomstvoSViStR\ZnakomstvoSViSt\x64\Debug\NativeCodeAnalysis.read.1.tlog
