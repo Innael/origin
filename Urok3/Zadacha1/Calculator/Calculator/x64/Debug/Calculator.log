@@ -1,5 +1,0 @@
-﻿  Calculator.cpp
-C:\Users\Ice7\source\repos\Calculator\Calculator\Calculator.cpp(70,14): warning C4101: i: неиспользованная локальная переменная
-C:\Users\Ice7\source\repos\Calculator\Calculator\Calculator.cpp(25): warning C4715: Calculator::set_num2: значение возвращается не при всех путях выполнения
-C:\Users\Ice7\source\repos\Calculator\Calculator\Calculator.cpp(19): warning C4715: Calculator::set_num1: значение возвращается не при всех путях выполнения
-  Calculator.vcxproj -> C:\Users\Ice7\source\repos\Calculator\x64\Debug\Calculator.exe

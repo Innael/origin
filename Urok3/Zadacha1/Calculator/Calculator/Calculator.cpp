@@ -3,60 +3,58 @@
 #include <windows.h>
 
 class Calculator {
-public:
+private:
     double num1;
     double num2;
 
-    Calculator (double num1, double num2) {
-        this->num1 = num1;
-        this->num1 = num2;
+public:
+    Calculator () {
+        this -> num1 = 1.0;
+        this -> num2 = 1.0;
     }
-
+public:
     bool set_num1(double num1) {
-        this->num1 = num1;
-        if (num1 != 0)
-            return true;       
-    }
-
-    bool set_num2(double num2) {
-        this->num2 = num2;
-        if (num2 != 0)
+        if (num1 != 0) {
+            this->num1 = num1;
             return true;
+        }
+        else
+            return  false;
+    }
+public:
+    bool set_num2(double num2) {
+        if (num2 != 0) {
+            this->num2 = num2;
+            return true;
+        }
+        else
+            return  false;
+    }
+    
+        
+
+    double add () {
+         return num1 + num2;
     }
 
-    void add (double a, double b) {
-        a = num1;
-        b = num2;
-        std::cout << "num1 + num2 = " << a + b << "\n";
-    }
-    void subtract_1_2(double a, double b) {
-        a = num1;
-        b = num2;
-        std::cout << "num1 - num2 = " << a - b << "\n";
+    double subtract_1_2() {
+        return num1 - num2;
     }
 
-    void subtract_2_1(double a, double b) {
-        a = num1;
-        b = num2;
-        std::cout << "num2 - num1 = " << b - a << "\n";
+    double subtract_2_1() {        
+        return num2 - num1;
     }
 
-    void multiply(double a, double b) {
-        a = num1;
-        b = num2;
-        std::cout << "num1 * num2 = " << a * b << "\n";
+    double multiply() {       
+        return num1 * num2;
     }
 
-    void divide_1_2(double a, double b) {
-        a = num1;
-        b = num2;
-        std::cout << "num1 / num2 = " << a / b << "\n";
+    double divide_1_2() {
+        return num1 / num2;
     }
 
-    void divide_2_1(double a, double b) {
-        a = num1;
-        b = num2;
-        std::cout << "num2 / num1 = " << b / a << "\n";
+    double divide_2_1() {       
+        return num2 / num1;
     }
 };
 
@@ -64,15 +62,16 @@ int main()
 {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
-    double resultat = 0;
-    Calculator vychisleniya(0, 0);
+
+    double a = 1;
+    Calculator vychisleniya;
 
     for (int i;;) {
         for (int j = 0; j < 1; ){
             std::cout << "Введите num1: ";
-            std::cin >> vychisleniya.num1;
+            std::cin >> a;
             j = 1;
-            if (vychisleniya.set_num1(vychisleniya.num1) != 1) {
+            if (vychisleniya.set_num1(a) != 1) {
                 std::cout << "Неверный ввод!" << "\n";
                 j = 0;
             }
@@ -80,20 +79,20 @@ int main()
 
         for (int j = 0; j < 1; ) {
             std::cout << "Введите num2: ";
-            std::cin >> vychisleniya.num2;
+            std::cin >> a;
             j = 1;
-            if (vychisleniya.set_num2(vychisleniya.num2) != 1) {
+            if (vychisleniya.set_num2(a) != 1) {
                 std::cout << "Неверный ввод!" << "\n";
                 j = 0;
             }
         }
 
-        vychisleniya.add(0, 0);
-        vychisleniya.subtract_1_2(0, 0);
-        vychisleniya.subtract_2_1(0, 0);
-        vychisleniya.multiply(0, 0);
-        vychisleniya.divide_1_2(0, 0);
-        vychisleniya.divide_2_1(0, 0);
+        std::cout << "num1 + num2 = " << vychisleniya.add() << "\n";
+        std::cout << "num1 - num2 = " << vychisleniya.subtract_1_2() << "\n";
+        std::cout << "num2 - num1 = " << vychisleniya.subtract_2_1() << "\n";
+        std::cout << "num1 * num2 = " << vychisleniya.multiply() << "\n";
+        std::cout << "num1 / num2 = " << vychisleniya.divide_1_2() << "\n";
+        std::cout << "num2 / num1 = " << vychisleniya.divide_2_1() << "\n";
     }
     return 0;
 }
