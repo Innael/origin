@@ -25,27 +25,7 @@ public:
     int Naschitali() {
         return sch;
     };
-
-    void Komanda(std::string znak) {
-        for (int i = 0; i < 1; ) {
-            std::cout << "Введите команду ('+', '-', '=' или 'x'): ";
-            std::cin >> znak;
         
-            if (znak == "+") {
-                ++sch;
-            }
-            else if (znak == "-") {
-                --sch;
-            }
-            else if (znak == "=") {
-                std::cout << sch << "\n";
-            }
-            else if (znak == "x" || znak == "х") {
-                std::cout << "До свидания!";
-                i = 1;
-            }
-        }
-    };
 };
 
 int main()
