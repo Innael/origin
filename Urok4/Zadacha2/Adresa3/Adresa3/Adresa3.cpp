@@ -4,65 +4,53 @@
 #include <windows.h>
 
 class Adress {
-
     std::string gorod;
     std::string ulica;
     std::string dom;
     std::string kvartira;
-    int schetchik;
-
 public:
     Adress() {
         gorod = "Какой то город";
         ulica = "Какая то улица";
         dom = "1";
         kvartira = "1";
-        schetchik = 1;
     }
-    void vstroku(std::string& chitayu_i_to_i_eto) {
-        if (schetchik == 1) {
-            gorod = chitayu_i_to_i_eto;
-            ++schetchik;
-        }
-        else if (schetchik == 2) {
-            ulica = chitayu_i_to_i_eto;
-            ++schetchik;
-        }
-        else if (schetchik == 3) {
-            dom = chitayu_i_to_i_eto;
-            ++schetchik;
-        }
-        else if (schetchik == 4) {
-            kvartira = chitayu_i_to_i_eto;
-            schetchik = 1;
-        }
+    void setGorod(std::string& chitayu_i_to_i_eto) {
+        gorod = chitayu_i_to_i_eto;
+    };
 
-    }
-    void izstroki(std::ofstream& zapis) {
-        if (schetchik == 1) {
-            zapis << gorod << ", ";
-            ++schetchik;
-        }
-        else if
-            (schetchik == 2) {
-            zapis << ulica << ", ";
-            ++schetchik;
-        }
-        else if
-            (schetchik == 3) {
-            zapis << dom << ", ";
-            ++schetchik;
-        }
-        else if
-            (schetchik == 4) {
-            zapis << kvartira << std::endl;
-            schetchik = 1;
-        }
-    }   
-    int sravnenie() {
-        int m1 = (int)gorod[0];
-     // std::cout << m1 << "\n"; - для отладки
-        return m1;
+    void setUlica(std::string& chitayu_i_to_i_eto) {
+        ulica = chitayu_i_to_i_eto;
+    };
+
+    void setDom(std::string& chitayu_i_to_i_eto) {
+        dom = chitayu_i_to_i_eto;
+    };
+
+    void setKvartira(std::string& chitayu_i_to_i_eto) {
+        kvartira = chitayu_i_to_i_eto;
+    };
+
+
+    std::string getGorod() {
+        return gorod;
+    };
+
+    std::string getUlica() {
+        return ulica;
+
+    };
+
+    std::string getDom() {
+        return dom;
+    };
+
+    std::string getKvartira() {
+        return kvartira;
+    };
+
+    std::string sravnenie() {
+        return gorod;
     }
 };
 
@@ -82,27 +70,21 @@ int main()
 
     std::string chitayu_i_to_i_eto;
     chtenie >> chitayu_i_to_i_eto;
-    int skolko = stoi(chitayu_i_to_i_eto);
-    int n = (skolko + 3);
-    Adress* basa = new Adress[n];    
+    int skolko = stoi(chitayu_i_to_i_eto);    
+    Adress* basa = new Adress[skolko];
+    Adress podmena;
 
     for (int j = 0; j < skolko; ++j) {
-        for (int i = 0; i < 4; ++i) {
-            chtenie >> chitayu_i_to_i_eto;
-            basa[j].vstroku(chitayu_i_to_i_eto);
-            if (chtenie.eof())
-                break;
-        }
-    }
-       
-    for (int j = 0; j < skolko; ++j){
-        for (int i =j; i < skolko - 1; ++i) {
-            if (basa[i].sravnenie() > basa[i + 1].sravnenie()) {  // - визуал пишет про чтение недопустимых данных из basa, не понимаю, что не так с массивом? 
-                basa[skolko + 2] = basa[i];
-                basa[i] = basa[i + 1];
-                basa[i + 1] = basa[skolko + 2];
-            }
-        }      
+        chtenie >> chitayu_i_to_i_eto;
+        basa[j].setGorod(chitayu_i_to_i_eto);
+        chtenie >> chitayu_i_to_i_eto;
+        basa[j].setUlica(chitayu_i_to_i_eto);
+        chtenie >> chitayu_i_to_i_eto;
+        basa[j].setDom(chitayu_i_to_i_eto);
+        chtenie >> chitayu_i_to_i_eto;
+        basa[j].setKvartira(chitayu_i_to_i_eto);
+        if (chtenie.eof())
+            break;
     }
 
     std::ofstream zapis("out.txt");
@@ -110,11 +92,25 @@ int main()
     zapis << skolko << "\n";
 
     for (int j = 0; j < skolko; ++j) {
-        for (int i = 0; i < 4; ++i) {
-            basa[j].izstroki(zapis);
+        for (int i = j; i < skolko-1; ++i) {            
+                if (basa[i].sravnenie() >  basa[i + 1].sravnenie()) { 
+                    podmena = basa[i];
+                    basa[i] = basa[i + 1];
+                    basa[i + 1] = podmena;
+                }       
         }
-    }
-
+    }   
+    
+    for (int j = 0; j < skolko; ++j) {
+        zapis << basa[j].getGorod();
+        zapis << " ";
+        zapis << basa[j].getUlica();
+        zapis << " ";
+        zapis << basa[j].getDom();
+        zapis << " ";
+        zapis << basa[j].getKvartira();
+        zapis << "\n";
+    }    
 
     chtenie.close();
     zapis.close();
