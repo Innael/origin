@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.22.0)
+project(DinBiblCMake)
+set (CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+add_executable(ByeBye.exe ByeBye.cpp)
+add_library(GoodbyeDinLib SHARED Goodbye.h Goodbye.cpp)
+target_link_libraries(ByeBye.exe GoodbyeDinLib)
