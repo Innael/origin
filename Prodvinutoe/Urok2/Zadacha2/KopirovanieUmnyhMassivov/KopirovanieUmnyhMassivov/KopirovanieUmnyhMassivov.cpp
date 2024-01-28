@@ -28,7 +28,8 @@ public:
 
     smart_arrey& operator = (smart_arrey& new_arr) {
         this->size = new_arr.get_size();
-        this->step = new_arr.get_step();        
+        this->step = new_arr.get_step();
+        delete[] this->arr;
         this->arr = new int[size];
         for (int i = 0; i < size; ++i) {
            this->arr[i] = new_arr.get_element(i);
@@ -55,8 +56,7 @@ public:
         ++step;
     }
     ~smart_arrey() {
-        delete[] this->arr;
-        //std::cout << "Массив уничтожен\n";
+        delete[] this->arr;       
     }
 };
 

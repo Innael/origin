@@ -23,11 +23,10 @@ public:
         this->arr = new int[size + 1] {};        
     }
     int& operator[](int index) {
-        return arr[index];
-    }
-    //int& operator = (int index) {
-      //  return arr[index];
-    //}
+        if (index > 0 || index < size) {
+            return arr[index];
+        }
+    }    
     int get_element(int index) {
         if (index < 0 || index >= size) throw Wrong_Index();
         return arr[index];
@@ -38,8 +37,7 @@ public:
         ++step;
     }
    ~smart_arrey() {
-       delete[] arr;
-       //std::cout << "Массив уничтожен\n";
+       delete[] arr;      
    }
 };
 
@@ -52,12 +50,17 @@ int main()
 
     int sz = 0;
 
-    std::cout << "Введите размер создаваемого массива: ";
-    std::cin >> sz;
+    while (sz < 1) {
+        std::cout << "Введите размер создаваемого массива: ";
+        std::cin >> sz;
+        if (sz < 1) {
+            std::cout << "Размер массива не может быть меньше одного элемента." << std::endl;
+        }
+    }
     
     smart_arrey ar(sz);
     
-    try {
+    try {        
         ar.add_element(11);
         ar.add_element(12);
         ar.add_element(122);
@@ -77,7 +80,7 @@ int main()
     }
 
         for (int i = 0; i < sz; ++i) {
-            std::cout << ar[i] << " ";
+            std::cout << ar.get_element(i) << " ";
         }
     
     return 0;
