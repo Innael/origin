@@ -6,8 +6,8 @@ T my_sqrt(T & a) {
     return a * a;
 }
 
-template<>
-std::vector<int> my_sqrt(std::vector<int> & vec) {
+template<class T>
+std::vector<T> my_sqrt(std::vector<T> & vec) {
     int size = vec.size();
     for (int i = 0; i < size; ++i) {
         vec[i] *= vec[i];
