@@ -7,7 +7,7 @@ T my_sqrt(T & a) {
 }
 
 template<class T>
-std::vector<T> my_sqrt(std::vector<T> & vec) {
+std::vector<T> my_sqrt(std::vector<T> vec) {
     int size = vec.size();
     for (int i = 0; i < size; ++i) {
         vec[i] *= vec[i];
@@ -33,6 +33,12 @@ int main()
     std::cout << "[OUT]:";
     for (int i : vec2) {
         std::cout << " " << i ;
+    }
+
+std::cout << "\n vec: ";
+
+    for (int i : vec) {
+        std::cout << i << " ";
     }
 
     return 0;
