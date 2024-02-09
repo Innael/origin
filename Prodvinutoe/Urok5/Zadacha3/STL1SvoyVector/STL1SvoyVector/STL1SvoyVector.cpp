@@ -9,7 +9,7 @@ public:
 
 
 template <class T> class Svoy_vector{
-    T* arr = new T[0];
+    T* arr = nullptr;
     int f_size = 0;
     int l_size = 0;
 public:
