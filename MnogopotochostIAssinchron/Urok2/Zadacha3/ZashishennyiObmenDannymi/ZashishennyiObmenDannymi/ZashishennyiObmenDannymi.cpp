@@ -11,16 +11,17 @@ public:
 
 void swap1(Data& a, Data& b) {
     Data temp;
-    a.mtx.lock();
-    b.mtx.lock();
+    std::lock(a.mtx, b.mtx); // не понятно, как спользовать одновременно с lock_guard
+    //std::lock_guard<std::mutex> grd_a(a.mtx); с этой строчкой возникает C26111 "Вызывающему не удаётся снять блокировку с a -> mtx"
+    //std::lock_guard<std::mutex> grd_b(b.mtx); с этой строчкой возникает C26111 "Вызывающему не удаётся снять блокировку с b -> mtx"
     temp.s_field_a = std::move(a.s_field_a);
     temp.s_field_b = std::move(a.s_field_b);
     a.s_field_a = std::move(b.s_field_a);
     a.s_field_b = std::move(b.s_field_b);
     b.s_field_a = std::move(temp.s_field_a);
     b.s_field_b = std::move(temp.s_field_b);
-    a.mtx.unlock();
-    b.mtx.unlock();    
+    a.mtx.unlock();   // - в таком виде, вроде работает
+    b.mtx.unlock();
 }
 
 void swap2(Data& a, Data& b) {
@@ -36,20 +37,27 @@ void swap2(Data& a, Data& b) {
 
 void swap3(Data& a, Data& b) {
     Data temp;
-    std::unique_lock<std::mutex>  mLG1(a.mtx);
-    std::unique_lock<std::mutex>  mLG21(b.mtx);
+    std::unique_lock<std::mutex>  mLG1(a.mtx, std::defer_lock);
+    std::unique_lock<std::mutex>  mLG2(b.mtx, std::defer_lock);
+    std::lock(mLG1, mLG2);
     temp.s_field_a = std::move(a.s_field_a);
     temp.s_field_b = std::move(a.s_field_b);
     a.s_field_a = std::move(b.s_field_a);
     a.s_field_b = std::move(b.s_field_b);
     b.s_field_a = std::move(temp.s_field_a);
-    b.s_field_b = std::move(temp.s_field_b);   
+    b.s_field_b = std::move(temp.s_field_b);
+    mLG1.unlock();
+    mLG2.unlock();
 }
 
 void tricky_program(Data& a, Data& b) {
+    std::thread::id id = std::this_thread::get_id();
     swap1(a, b);
+    std::cout << "Tread: " << id << " Swap\n\n";
     swap2(a, b);
+    std::cout << "Tread: " << id << " Swap\n\n";
     swap3(a, b);
+    std::cout << "Tread: " << id << " Swap\n\n";
 }
 
 
