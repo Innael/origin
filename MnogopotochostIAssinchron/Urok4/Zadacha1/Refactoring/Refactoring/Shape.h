@@ -12,12 +12,7 @@ enum Type {
 class Shape
 {
 public:		
-	Shape() = default;	
-	Shape(int _x1, int _y1, int _x2, int _y2);
-	Shape(int _x1, int _y1, int _x2, int _y2, int _x3, int _y3, int _x4, int _y4);
-	Shape(int _x1, int _y1, int _z1, int _x2, int _y2, int _z2, int _x3, int _y3, int _z3, int _x4, int _y4, int _z4, int _x5, int _y5, int _z5, int _x6, int _y6, int _z6, int _x7, int _y7, int _z7, int _x8, int _y8, int _z8);
-	Shape(int _x1, int _y1, double R);
-	Shape(int _x1, int _y1, double R, double H);
+	Shape() = default;					
 	int getType() { return type; }
 	void shift(int m, int n, int k);
 	void scaleAxis(char axis, int a);
@@ -36,4 +31,32 @@ public:
 	double square = 0;
 	double height = 0;
 	double radius = 0;
+};
+
+class Line : public Shape {
+public:
+	Line();
+	Line(int _x1, int _y1, int _x2, int _y2);
+};
+
+class Square : public Line {
+public:
+	Square();
+	Square(int _x1, int _y1, int _x2, int _y2, int _x3, int _y3, int _x4, int _y4);
+};
+
+class Cube : public Square {
+public:
+	Cube(int _x1, int _y1, int _z1, int _x2, int _y2, int _z2, int _x3, int _y3, int _z3, int _x4, int _y4, int _z4, int _x5, int _y5, int _z5, int _x6, int _y6, int _z6, int _x7, int _y7, int _z7, int _x8, int _y8, int _z8);
+};
+
+class Circle : public Shape {
+public:
+	Circle();
+	Circle(int _x1, int _y1, double R);
+};
+
+class Cylinder : public Circle {
+public:
+	Cylinder(int _x1, int _y1, double R, double H);
 };
