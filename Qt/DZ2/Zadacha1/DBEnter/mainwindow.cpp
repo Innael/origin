@@ -10,15 +10,12 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    delete ui;    
+    delete ui;
 }
-
-
-
 
 
 void MainWindow::on_pushButton_clicked()
 {
-    BDForm.show();
+    DBAcc.show();
 }
 

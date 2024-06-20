@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(QtBDForm VERSION 0.1 LANGUAGES CXX)
+project(DBEnter VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -17,37 +17,37 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-        dialogbdform.h
-        dialogbdform.cpp
-        dialogbdform.ui
+        dbaccess.cpp
+        dbaccess.h
+        dbaccess.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(QtBDForm
+    qt_add_executable(DBEnter
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
 # Define target properties for Android with Qt 6 as:
-#    set_property(TARGET QtBDForm APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
+#    set_property(TARGET DBEnter APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
     if(ANDROID)
-        add_library(QtBDForm SHARED
+        add_library(DBEnter SHARED
             ${PROJECT_SOURCES}
         )
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
-        add_executable(QtBDForm
+        add_executable(DBEnter
             ${PROJECT_SOURCES}
         )
     endif()
 endif()
 
-target_link_libraries(QtBDForm PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(DBEnter PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
-set_target_properties(QtBDForm PROPERTIES
+set_target_properties(DBEnter PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -55,10 +55,10 @@ set_target_properties(QtBDForm PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-install(TARGETS QtBDForm
+install(TARGETS DBEnter
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(QtBDForm)
+    qt_finalize_executable(DBEnter)
 endif()

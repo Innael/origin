@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "dialogbdform.h"
+#include "dbaccess.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,14 +17,10 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_mw_dialogButton_accepted();
-
-    void on_mw_dialogButton_rejected();
-
     void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
-    DialogBDForm BDForm;
+    DBAccess DBAcc;
 };
 #endif // MAINWINDOW_H
