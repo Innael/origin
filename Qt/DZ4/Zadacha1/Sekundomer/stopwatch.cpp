@@ -54,6 +54,11 @@ void Stopwatch::reset()
     emit sig_reset();
 }
 
+bool Stopwatch::check_time_on()
+{
+    return time_on;
+}
+
 Stopwatch::~Stopwatch(){
 
 }

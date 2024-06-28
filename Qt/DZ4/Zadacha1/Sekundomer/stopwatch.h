@@ -10,6 +10,7 @@ class Stopwatch: public QObject
 public:
     explicit Stopwatch(QObject *parent = nullptr);
     ~ Stopwatch();
+private:
     QTimer *qtm;
     double time_pass;
     bool time_on;
@@ -19,9 +20,11 @@ public:
     double res_time;
     double best_time;
 
+public:
     void on_start();
     void circle_res();
     void reset();
+    bool check_time_on();
 
  public slots:
     void send_time();

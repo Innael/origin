@@ -39,7 +39,7 @@ void MainWindow::full_restart()
 
 void MainWindow::on_bt_start_stop_clicked()
 {
-  if (stw->time_on == false){
+  if (stw->check_time_on() == false){
   stw->on_start();  
   ui->bt_start_stop->setText("Стоп");
   ui->bt_circle->setEnabled(true);
@@ -59,14 +59,8 @@ void MainWindow::on_bt_circle_clicked()
 
 void MainWindow::on_bt_clear_clicked()
 {
-   stw->time_pass = 0;
-   stw->circle_number = 0;
-   stw->c_time1 = 0;
-   stw->c_time2 = 0;
-   stw->res_time =0;
-   stw->best_time = 99999;
-   ui->lb_time->setText("0.0c");
-   //stw->reset();
+
+   stw->reset();
 }
 
 
