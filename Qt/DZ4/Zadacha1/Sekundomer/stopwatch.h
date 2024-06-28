@@ -26,7 +26,7 @@ public:
     void reset();
     bool check_time_on();
 
- public slots:
+ private slots:
     void send_time();
 
 signals:
