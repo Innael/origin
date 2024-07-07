@@ -63,7 +63,7 @@ private:
 
     QChart* chart;
     QChartView* chartView;
-    QLineSeries* ptrGraph;
+    QLineSeries* ptrGraph;    
 
 };
 #endif // MAINWINDOW_H

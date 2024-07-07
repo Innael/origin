@@ -12,11 +12,13 @@ MainWindow::MainWindow(QWidget *parent)
     chartView = new QChartView(chart);
     connect(this, &MainWindow::sig_show_graph, this, &MainWindow::show_graph);
     ptrGraph = new QLineSeries(this);
+    chartView->setMinimumHeight(500);
+    chartView->setMinimumWidth(500);   
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+    delete ui;   
 }
 
 
@@ -32,7 +34,7 @@ QVector<uint32_t> MainWindow::ReadFile(QString path, uint8_t numberChannel)
 {
 
     QFile file(path);
-    file.open(QIODevice::ReadOnly);
+    file.open(QIODevice::ReadOnly);    
 
     if(file.isOpen() == false){
 
@@ -43,9 +45,8 @@ QVector<uint32_t> MainWindow::ReadFile(QString path, uint8_t numberChannel)
             mb.exec();
         }
     }
-    else{
+     else{
 
-      ui->lb_read_succes->setText("Загрузка данных из файла прошла успешно");
     }
 
     QDataStream dataStream;
@@ -85,7 +86,7 @@ QVector<uint32_t> MainWindow::ReadFile(QString path, uint8_t numberChannel)
             }
         }
     }
-    ui->chB_readSucces->setChecked(true);
+    ui->chB_readSucces->setChecked(true);    
     return readData;
 }
 
@@ -232,7 +233,7 @@ void MainWindow::on_pb_start_clicked()
                                                    double y = res[i];
                                                    ptrGraph->append(x, y);
                                                 }
-                                                chart->addSeries(ptrGraph);
+                                                chart->addSeries(ptrGraph);                                                
                                                 emit sig_show_graph();
                                              };
 
@@ -241,12 +242,12 @@ void MainWindow::on_pb_start_clicked()
                                .then(findMax);
 
 
-
+    ui->cmB_numCh->setEnabled(false);
 }
 
 void MainWindow::show_graph()
 {
-    //chart->legend()->setVisible(true);           // почему то нет эффекта
+    Sleep(1000);
     chartView->chart()->createDefaultAxes();
     chartView->show();
 }
@@ -257,6 +258,7 @@ void MainWindow::on_pb_clearResult_clicked()
     if (chart->series().isEmpty() == false){
     ptrGraph->clear();
     chart->removeSeries(ptrGraph);
+    ui->cmB_numCh->setEnabled(true);
     }
 }
 

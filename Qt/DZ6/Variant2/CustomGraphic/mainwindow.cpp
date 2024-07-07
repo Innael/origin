@@ -240,7 +240,7 @@ void MainWindow::on_pb_start_clicked()
                                .then(process)
                                .then(findMax);
 
-
+    ui->cmB_numCh->setEnabled(false);
 
 }
 
@@ -255,5 +255,6 @@ void MainWindow::show_graph()
 void MainWindow::on_pb_clearResult_clicked()
 {
     graphWin->start_clear();
+    ui->cmB_numCh->setEnabled(true);
 }
 

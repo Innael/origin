@@ -15,10 +15,10 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="3" column="0">
-     <widget class="QLineEdit" name="le_path">
-      <property name="readOnly">
-       <bool>true</bool>
+    <item row="4" column="0" colspan="2">
+     <widget class="QPushButton" name="pb_clearResult">
+      <property name="text">
+       <string>Очистить результат</string>
       </property>
      </widget>
     </item>
@@ -29,27 +29,10 @@
       </property>
      </widget>
     </item>
-    <item row="4" column="0" colspan="2">
-     <widget class="QPushButton" name="pb_clearResult">
-      <property name="text">
-       <string>Очистить результат</string>
-      </property>
-     </widget>
-    </item>
     <item row="2" column="0">
      <widget class="QLabel" name="lb_numCh">
       <property name="text">
        <string>Номер канала:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0" colspan="2">
-     <widget class="QPushButton" name="pb_start">
-      <property name="text">
-       <string>Старт</string>
-      </property>
-      <property name="flat">
-       <bool>false</bool>
       </property>
      </widget>
     </item>
@@ -72,8 +55,25 @@
       </item>
      </widget>
     </item>
+    <item row="5" column="0" colspan="2">
+     <widget class="QPushButton" name="pb_start">
+      <property name="text">
+       <string>Старт</string>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
     <item row="1" column="0" colspan="2">
      <widget class="QTextEdit" name="te_Result">
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLineEdit" name="le_path">
       <property name="readOnly">
        <bool>true</bool>
       </property>
@@ -138,13 +138,6 @@
         <widget class="QSpinBox" name="spinBox"/>
        </item>
       </layout>
-     </widget>
-    </item>
-    <item row="6" column="0" colspan="2">
-     <widget class="QLabel" name="lb_read_succes">
-      <property name="text">
-       <string/>
-      </property>
      </widget>
     </item>
    </layout>
