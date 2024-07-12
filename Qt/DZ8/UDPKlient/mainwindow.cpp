@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(udpWorker, &UDPworker::sig_sendTimeToGUI, this, &MainWindow::DisplayTime);
     connect(udpWorker, &UDPworker::sig_sendTextToGUI, this, &MainWindow::DisplayText);
+    ui->pb_stop->setEnabled(false);
 
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, [&]{
@@ -39,6 +40,8 @@ MainWindow::~MainWindow()
 void MainWindow::on_pb_start_clicked()
 {
     timer->start(TIMER_DELAY);
+    ui->pb_stop->setEnabled(true);
+    ui->pb_start->setEnabled(false);
 }
 
 
@@ -71,6 +74,8 @@ void MainWindow::DisplayText(QString data)
 void MainWindow::on_pb_stop_clicked()
 {
     timer->stop();
+    ui->pb_stop->setEnabled(false);
+    ui->pb_start->setEnabled(true);
 }
 
 
@@ -81,6 +86,7 @@ void MainWindow::on_pushButton_clicked()
     QDataStream textStream(&textArr, QIODevice::WriteOnly);
 
     textStream << text_to_send;
+     ui->text_field->clear();
 
 
     udpWorker->SendDatagram(textArr, 2);
