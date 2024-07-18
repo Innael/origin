@@ -83,8 +83,7 @@ void MainWindow::on_act_connect_triggered()
 
 
        auto conn = [&]{dataBase->ConnectToDataBase(dataForConnect);};
-       auto res = QtConcurrent::run(conn);
-       //dataBase->ConnectToDataBase(dataForConnect);
+       auto res = QtConcurrent::run(conn);       
     }
     else{
         dataBase->DisconnectFromDataBase(DB_NAME);

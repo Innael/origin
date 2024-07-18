@@ -5,7 +5,7 @@ DataBase::DataBase(QObject *parent)
 {
 
     dataBase = new QSqlDatabase();
-
+    choice_req = new QSqlQueryModel(this);
 }
 
 DataBase::~DataBase()
@@ -24,7 +24,7 @@ void DataBase::AddDataBase(QString driver, QString nameDB)
 {
 
     *dataBase = QSqlDatabase::addDatabase(driver, nameDB);
-
+    all_tab = new QSqlTableModel(this, *dataBase);
 }
 
 /*!
@@ -73,9 +73,10 @@ void DataBase::RequestToDB(QTableView *tw , QString request)
 {
 
     if (request == "Все"){
-        all_tab = new QSqlTableModel(this, *dataBase);
+
 
         all_tab->setTable("film");
+        all_tab->select();
         all_tab->setEditStrategy(QSqlTableModel::OnManualSubmit);
         all_tab->setHeaderData(1, Qt::Horizontal, tr("Название фильма"));
         all_tab->setHeaderData(2, Qt::Horizontal, tr("Описание фильма"));
@@ -89,24 +90,24 @@ void DataBase::RequestToDB(QTableView *tw , QString request)
         //tw->setColumnWidth(2,500);   // - оставлено для опциональной подгонки размеров столбцов, так как описания описания достаточно длинные
         tw->resizeColumnsToContents();
 
-        all_tab->select();
+
 
         emit sig_SendDataFromDB();
     }
     else if (request == "Комедия"){
-        choice_req = new QSqlQueryModel(this);
-        choice_req->setQuery("SELECT title, description FROM film f JOIN film_category fc on f.film_id = fc.film_id JOIN category c on c.category_id = fc.category_id WHERE c.name = 'Comedy'");
-        choice_req->setHeaderData(1, Qt::Horizontal, tr("Название фильма"));
-        choice_req->setHeaderData(2, Qt::Horizontal, tr("Описание фильма"));
+
+        choice_req->setQuery("SELECT title, description FROM film f JOIN film_category fc on f.film_id = fc.film_id JOIN category c on c.category_id = fc.category_id WHERE c.name = 'Comedy'", *dataBase);
+        choice_req->setHeaderData(0, Qt::Horizontal, tr("Название фильма"));
+        choice_req->setHeaderData(1, Qt::Horizontal, tr("Описание фильма"));
 
         tw->setModel(choice_req);
         emit sig_SendDataFromDB();
     }
     else if (request == "Ужасы"){
-        choice_req = new QSqlQueryModel(this);
-        choice_req->setQuery("SELECT title, description FROM film f JOIN film_category fc on f.film_id = fc.film_id JOIN category c on c.category_id = fc.category_id WHERE c.name = 'Horror'");
-        choice_req->setHeaderData(1, Qt::Horizontal, tr("Название фильма"));
-        choice_req->setHeaderData(2, Qt::Horizontal, tr("Описание фильма"));
+
+        choice_req->setQuery("SELECT title, description FROM film f JOIN film_category fc on f.film_id = fc.film_id JOIN category c on c.category_id = fc.category_id WHERE c.name = 'Horror'", *dataBase);
+        choice_req->setHeaderData(0, Qt::Horizontal, tr("Название фильма"));
+        choice_req->setHeaderData(1, Qt::Horizontal, tr("Описание фильма"));
 
         tw->setModel(choice_req);
         emit sig_SendDataFromDB();
